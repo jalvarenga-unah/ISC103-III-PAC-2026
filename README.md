@@ -12,8 +12,6 @@
 
 ## ISC-103
 
----
-
 ## Profesor: Juan Enrique Alvarenga - jealvarengar@unah.edu.hn
 
 ## Horario
