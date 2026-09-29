@@ -49,14 +49,16 @@ public class Cuenta {
 
     void retiro(double monto) {
 
-        if (monto > this.saldo) {
-            //no se puede
-            //generar una excepción
-            return;
+        if (monto < 0) {
+            throw new ArithmeticException("El monto ingresado debe ser mayor a cero");
         }
-        
-        if(monto > 5000){
-            //tampoco se puede
+
+        if (monto > this.saldo) {
+            throw new Error("Fondos insuficientes");
+        }
+
+        if (monto > 5000) {
+            throw new NullPointerException("Operación no permitida");
         }
 
         this.saldo = this.saldo - monto;
@@ -67,6 +69,24 @@ public class Cuenta {
 //        } else {
 //            //no se pudo
 //        }
+    }
+
+    void deposito(double monto) {
+
+//        if (monto < 0) {
+//            //No se puede
+//            return;
+//        }
+//
+//        if (monto > 5000) {
+//            //tampoco se puede
+//            return;
+//        }
+        if (monto < 0 || monto > 5000) {
+            throw new Error("El monto ingresado no es válido");
+        }
+
+        this.saldo = this.saldo + monto;
     }
 
 }
