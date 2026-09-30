@@ -20,29 +20,43 @@ public class CuentaBanco {
 //        
 //        }
         //crear una instancia de la clase Cuenta
-        Cuenta miCuenta = new Cuenta("Juan", 100.0);
-        Cuenta miCuenta2 = new Cuenta("Enrique", 400);
+//        Cuenta miCuenta = new Cuenta("Juan", 100.0);
+//        Cuenta miCuenta2 = new Cuenta("Enrique", 400);
+//
+//        System.out.println("=========miCuenta=========");
+//        System.out.println(miCuenta.getTitular());
+//        System.out.println(miCuenta.getSaldo());
+//
+    
 
-        System.out.println("=========miCuenta=========");
-        System.out.println(miCuenta.getTitular());
-        System.out.println(miCuenta.getSaldo());
+////        miCuenta2. saldo = 100000;
+//       
+//
+//        try {
+//             miCuenta2.retiro(-100000);
+//             
+//            miCuenta2.deposito(300);
+//            miCuenta2.deposito(-300); //❌ se rompe el programa
+//
+//        } catch (Exception error) {
+//            System.out.println(error.getMessage());
+//        }
+//        
+//        System.out.println("=========miCuenta2=========");
+//        System.out.println(miCuenta2.getTitular());
+//        System.out.println(miCuenta2.getSaldo());
 
-//        miCuenta2. saldo = 100000;
-       
 
-        try {
-             miCuenta2.retiro(-100000);
-             
-            miCuenta2.deposito(300);
-            miCuenta2.deposito(-300); //❌ se rompe el programa
-
-        } catch (Exception error) {
-            System.out.println(error.getMessage());
-        }
+           
+        CuentaAhorro personal = new CuentaAhorro("Enrique", 100, 0.06);
+        CuentaAhorro personal2 = new CuentaAhorro("Enrique", 100);
         
-        System.out.println("=========miCuenta2=========");
-        System.out.println(miCuenta2.getTitular());
-        System.out.println(miCuenta2.getSaldo());
+        CuentaCheque empresarial = new CuentaCheque("Pedro", 50000, 100000);
+        
+//        personal.titular;
+
+
+
 
     }
 }
