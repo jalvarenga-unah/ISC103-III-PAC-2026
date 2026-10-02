@@ -25,7 +25,7 @@ public class CuentaAhorro extends Cuenta {
     }
 
     void aplicarInteres() {
-
+        
     }
 
 }
