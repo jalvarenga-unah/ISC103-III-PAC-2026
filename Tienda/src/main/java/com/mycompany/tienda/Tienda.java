@@ -11,6 +11,17 @@ package com.mycompany.tienda;
 public class Tienda {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+     
+        
+        CarritoCompra miLista = new CarritoCompra();
+        
+        
+        miLista.agregarAlCarrito("Manzana");
+        miLista.agregarAlCarrito("Pera");
+        miLista.agregarAlCarrito("Quesito");
+        
+        
+        System.out.println(miLista.listadoProductos());
+        
     }
 }

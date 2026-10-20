@@ -5,6 +5,7 @@
 package com.mycompany.tienda;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -12,18 +13,37 @@ import java.util.ArrayList;
  */
 public class CarritoCompra {
     
-    public ArrayList<String> productos;
+    // [    ]
+    private ArrayList<String> productos = new ArrayList();
     public double total;
     
     
-    void Pagar(MetodoPago metodoPago){
-    
+    void pagar(MetodoPago metodoPago){
+        
        boolean result =  metodoPago.procesarPago(this.total);
        
        if(!result){
            throw new Error("Error al procesar el pago");
        }
         
+    }
+    
+    
+    void agregarAlCarrito( String producto ){
+   
+        this.productos.add(producto);
+    }
+    
+    
+    void quitarDelCarrito(String producto){
+        
+        this.productos.remove(producto);
+
+    }
+    
+    
+    List<String>  listadoProductos(){
+        return this.productos;
     }
     
 }
