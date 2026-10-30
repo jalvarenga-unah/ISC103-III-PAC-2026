@@ -18,8 +18,12 @@ public class TarjetaCredito implements MetodoPago {
 
     @Override
     public boolean procesarPago(double monto) {
+
+        String cardMask = String.format("xxxxxxxxxxxx%s", numeroTarjeta.substring(numeroTarjeta.length() - 4));
         
         
+        
+        System.out.printf("Pagando con la tarjeta: %s la cantidad de %f", cardMask, monto);
 
         return true;
     }
