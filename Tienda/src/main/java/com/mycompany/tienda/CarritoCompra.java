@@ -16,8 +16,8 @@ import java.util.Map;
 public class CarritoCompra {
 
     // [    ]
-    private ArrayList<Map> productos = new ArrayList();
-    private ArrayList<Producto> productosV2 = new ArrayList();
+//    private ArrayList<Map> productos = new ArrayList();
+    private ArrayList<Producto> productos = new ArrayList();
     private double total;
 
     void pagar(MetodoPago metodoPago) {
@@ -30,29 +30,29 @@ public class CarritoCompra {
 
     }
 
-    void agregarAlCarrito(HashMap producto, int cantidad) {
+//    void agregarAlCarrito(HashMap producto, int cantidad) {
+//
+//        if (!producto.containsKey("precio")) {
+//            throw new Error("debe enviar el precio");
+//        }
+//
+//        if (!producto.containsKey("nombre")) {
+//            throw new Error("debe enviar el nombre");
+//        }
+//
+//        //agregar el producto al carrito
+//        this.productos.add(producto);
+//
+//        //sumarlo al total
+//        double precio = Double.parseDouble(producto.get("precio").toString());
+//        //   double cantidad = Double.parseDouble(producto.get("cantidad").toString());
+//
+//        this.total += precio * cantidad;
+//    }
 
-        if (!producto.containsKey("precio")) {
-            throw new Error("debe enviar el precio");
-        }
+    void agregarAlCarrito(Producto producto, int cantidad) {
 
-        if (!producto.containsKey("nombre")) {
-            throw new Error("debe enviar el nombre");
-        }
-
-        //agregar el producto al carrito
         this.productos.add(producto);
-
-        //sumarlo al total
-        double precio = Double.parseDouble(producto.get("precio").toString());
-        //   double cantidad = Double.parseDouble(producto.get("cantidad").toString());
-
-        this.total += precio * cantidad;
-    }
-
-    void agregarAlCarritoV2(Producto producto, int cantidad) {
-
-        this.productosV2.add(producto);
 
         this.total += producto.precio * cantidad;
 
@@ -65,7 +65,7 @@ public class CarritoCompra {
     }
 
     List<String> listadoProductos() {
-        return null; // this.productos;
+        return null; // [Manzana, Pera, Queso]
     }
 
 }

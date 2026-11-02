@@ -18,23 +18,24 @@ public class Tienda {
 
         ArrayList<MetodoPago> metodosDisponibles = new ArrayList();
 
-        HashMap p1 = new HashMap();
-        p1.put("nombre", "Manzana");
-        p1.put("precio", 40);
-        
-        
-        p1.put("cantidad", 3);
+//        HashMap p1 = new HashMap();
+//        p1.put("nombre", "Manzana");
+//        p1.put("precio", 40);
+//        
+//        
+//        p1.put("cantidad", 3);
+//
+//        HashMap p2 = new HashMap();
+//        p2.put("nombre", "Pera");
+//        p2.put("precio", 30);
+//        
+        Producto p1 = new Producto("Manzana", 30);
+        Producto p2 = new Producto("PEra", 40);
+        Producto prod = new Producto("Queso", 90);
 
-        HashMap p2 = new HashMap();
-        p2.put("nombre", "Pera");
-        p2.put("precio", 30);
-        
-        
-
-        carritoCompra.agregarAlCarrito(p1,4);
+        carritoCompra.agregarAlCarrito(p1, 4);
         carritoCompra.agregarAlCarrito(p2, 5);
-
-      
+        carritoCompra.agregarAlCarrito(prod, 1);
 
         System.out.println(carritoCompra.listadoProductos());
 
