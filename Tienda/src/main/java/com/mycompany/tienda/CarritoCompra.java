@@ -5,45 +5,67 @@
 package com.mycompany.tienda;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author juanalvarenga
  */
 public class CarritoCompra {
-    
+
     // [    ]
-    private ArrayList<String> productos = new ArrayList();
-    public double total;
-    
-    
-    void pagar(MetodoPago metodoPago){
-        
-       boolean result =  metodoPago.procesarPago(this.total);
-       
-       if(!result){
-           throw new Error("Error al procesar el pago");
-       }
-        
+    private ArrayList<Map> productos = new ArrayList();
+    private ArrayList<Producto> productosV2 = new ArrayList();
+    private double total;
+
+    void pagar(MetodoPago metodoPago) {
+
+        boolean result = metodoPago.procesarPago(this.total);
+
+        if (!result) {
+            throw new Error("Error al procesar el pago");
+        }
+
     }
-    
-    
-    void agregarAlCarrito( String producto ){
-   
+
+    void agregarAlCarrito(HashMap producto, int cantidad) {
+
+        if (!producto.containsKey("precio")) {
+            throw new Error("debe enviar el precio");
+        }
+
+        if (!producto.containsKey("nombre")) {
+            throw new Error("debe enviar el nombre");
+        }
+
+        //agregar el producto al carrito
         this.productos.add(producto);
+
+        //sumarlo al total
+        double precio = Double.parseDouble(producto.get("precio").toString());
+        //   double cantidad = Double.parseDouble(producto.get("cantidad").toString());
+
+        this.total += precio * cantidad;
     }
-    
-    
-    void quitarDelCarrito(String producto){
-        
+
+    void agregarAlCarritoV2(Producto producto, int cantidad) {
+
+        this.productosV2.add(producto);
+
+        this.total += producto.precio * cantidad;
+
+    }
+
+    void quitarDelCarrito(String producto) {
+
         this.productos.remove(producto);
 
     }
-    
-    
-    List<String>  listadoProductos(){
-        return this.productos;
+
+    List<String> listadoProductos() {
+        return null; // this.productos;
     }
-    
+
 }
