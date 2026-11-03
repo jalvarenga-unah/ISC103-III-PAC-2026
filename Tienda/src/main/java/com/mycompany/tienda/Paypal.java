@@ -20,7 +20,9 @@ public class Paypal implements MetodoPago {
     
 
     @Override
-    public boolean procesarPago(double monto) {
+    public boolean procesarPago(double monto,double descuento) {
+        
+        //se añade un 3% sobre el total
 
         return true;
     }

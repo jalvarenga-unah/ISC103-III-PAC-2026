@@ -13,7 +13,7 @@ public class Cripto implements MetodoPago {
     private String idWallet;
 
     @Override
-    public boolean procesarPago(double monto) {
+    public boolean procesarPago(double monto, double descuento) {
         return true;
     }
 

@@ -22,7 +22,7 @@ public class CarritoCompra {
 
     void pagar(MetodoPago metodoPago) {
 
-        boolean result = metodoPago.procesarPago(this.total);
+        boolean result = metodoPago.procesarPago(this.total, 10);
 
         if (!result) {
             throw new Error("Error al procesar el pago");
@@ -49,7 +49,6 @@ public class CarritoCompra {
 //
 //        this.total += precio * cantidad;
 //    }
-
     void agregarAlCarrito(Producto producto, int cantidad) {
 
         this.productos.add(producto);
@@ -65,7 +64,17 @@ public class CarritoCompra {
     }
 
     List<String> listadoProductos() {
-        return null; // [Manzana, Pera, Queso]
+
+        List tmp = new ArrayList();
+
+        for (int a = 0; a < this.productos.size(); a++) {
+            String nombre = this.productos.get(a).nombre;
+
+            tmp.add(nombre);
+        }
+
+        return tmp; // [Manzana - 4, Pera - 5, Queso - 1]
+
     }
 
 }

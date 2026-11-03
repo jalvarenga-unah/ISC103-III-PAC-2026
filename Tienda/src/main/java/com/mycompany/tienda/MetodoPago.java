@@ -10,6 +10,6 @@ package com.mycompany.tienda;
  */
 public interface MetodoPago {
 
-    public boolean procesarPago(double monto);
+    public boolean procesarPago(double monto, double descuento);
 
 }

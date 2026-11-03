@@ -13,7 +13,7 @@ import java.util.HashMap;
 public class Tienda {
 
     public static void main(String[] args) {
-
+          
         CarritoCompra carritoCompra = new CarritoCompra();
 
         ArrayList<MetodoPago> metodosDisponibles = new ArrayList();
@@ -30,7 +30,7 @@ public class Tienda {
 //        p2.put("precio", 30);
 //        
         Producto p1 = new Producto("Manzana", 30);
-        Producto p2 = new Producto("PEra", 40);
+        Producto p2 = new Producto("Pera", 40);
         Producto prod = new Producto("Queso", 90);
 
         carritoCompra.agregarAlCarrito(p1, 4);
