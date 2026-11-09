@@ -9,7 +9,7 @@ package com.mycompany.minisuper;
  * @author juanalvarenga
  */
 public class PantallaPrincipal extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PantallaPrincipal.class.getName());
 
     /**
@@ -31,7 +31,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         lblSubtitulo = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
         txtCargo = new javax.swing.JTextField();
-        btnClic = new javax.swing.JButton();
+        btnCambioNombre = new javax.swing.JButton();
+        lblCargo = new javax.swing.JLabel();
+        txtNum1 = new javax.swing.JTextField();
+        txtNum2 = new javax.swing.JTextField();
+        lblResult = new javax.swing.JLabel();
+        btnSuma = new javax.swing.JButton();
+        btnResta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,8 +51,23 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         lblTitulo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblTitulo.setName("lblTitulo"); // NOI18N
 
-        btnClic.setText("clic");
-        btnClic.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCambioNombre.setText("clic");
+        btnCambioNombre.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCambioNombre.addActionListener(this::btnCambioNombreActionPerformed);
+
+        lblCargo.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+
+        txtNum1.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
+
+        txtNum2.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
+
+        lblResult.setFont(new java.awt.Font("Helvetica Neue", 1, 48)); // NOI18N
+
+        btnSuma.setText("+");
+        btnSuma.addActionListener(this::btnSumaActionPerformed);
+
+        btnResta.setText("-");
+        btnResta.addActionListener(this::btnRestaActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -55,17 +76,36 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(358, 358, 358)
-                        .addComponent(lblSubtitulo))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(321, 321, 321)
                         .addComponent(lblTitulo))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(296, 296, 296)
                         .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
-                        .addComponent(btnClic)))
+                        .addComponent(btnCambioNombre))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(358, 358, 358)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCargo)
+                            .addComponent(lblSubtitulo)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSuma, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnResta, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(285, 285, 285)
+                                .addComponent(lblResult))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(72, 72, 72)
+                                .addComponent(txtNum1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(244, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(169, 169, 169)
+                    .addComponent(txtNum2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(567, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -74,15 +114,70 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addComponent(lblTitulo)
                 .addGap(18, 18, 18)
                 .addComponent(lblSubtitulo)
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnClic))
-                .addContainerGap(349, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblCargo)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblResult)
+                        .addGap(189, 189, 189))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCambioNombre))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(54, 54, 54)
+                                .addComponent(btnSuma, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnResta, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                                .addComponent(txtNum1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(208, 208, 208))))))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(334, Short.MAX_VALUE)
+                    .addComponent(txtNum2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(90, 90, 90)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCambioNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambioNombreActionPerformed
+
+        System.out.println("Hizo clic");
+
+        //obtener el valor de la caja de texto
+        String cargo = this.txtCargo.getText();
+        System.out.println(cargo);
+
+        //asignarlo al label
+        this.lblCargo.setText(cargo);
+
+
+    }//GEN-LAST:event_btnCambioNombreActionPerformed
+
+    private void btnSumaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSumaActionPerformed
+        // TODO add your handling code here:
+
+        int num1 = Integer.parseInt(txtNum1.getText());
+        int num2 = Integer.parseInt(txtNum2.getText());
+
+        lblResult.setText(String.valueOf(num1 + num2));
+    }//GEN-LAST:event_btnSumaActionPerformed
+
+    private void btnRestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaActionPerformed
+        // TODO add your handling code here:
+//        lblResult.setText(txtNum1.getText()-txtNum2.getText());
+        int num1 = Integer.parseInt(txtNum1.getText());
+        int num2 = Integer.parseInt(txtNum2.getText());
+
+        lblResult.setText(String.valueOf(num1 - num2));
+    }//GEN-LAST:event_btnRestaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -110,9 +205,15 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnClic;
+    private javax.swing.JButton btnCambioNombre;
+    private javax.swing.JButton btnResta;
+    private javax.swing.JButton btnSuma;
+    private javax.swing.JLabel lblCargo;
+    private javax.swing.JLabel lblResult;
     private javax.swing.JLabel lblSubtitulo;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTextField txtCargo;
+    private javax.swing.JTextField txtNum1;
+    private javax.swing.JTextField txtNum2;
     // End of variables declaration//GEN-END:variables
 }
