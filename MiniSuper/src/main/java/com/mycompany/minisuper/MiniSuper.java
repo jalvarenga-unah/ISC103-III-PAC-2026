@@ -14,6 +14,10 @@ public class MiniSuper {
         System.out.println("Hello World!");
         
         PantallaPrincipal p = new PantallaPrincipal();
-        p.setVisible(true);// hace visible el formuario
+        p.setVisible(false);// hace visible el formuario
+        
+        Tablas tabla = new Tablas();
+        tabla.setVisible(true);
+        
     }
 }
