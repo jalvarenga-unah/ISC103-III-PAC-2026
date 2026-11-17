@@ -15,6 +15,7 @@ public class Tablas extends javax.swing.JFrame {
 
     //el modelo de la tabla, se define a nivel de Clase
     private DefaultTableModel model;
+    private boolean isSaving = true;
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Tablas.class.getName());
 
@@ -40,7 +41,11 @@ public class Tablas extends javax.swing.JFrame {
         txtCant = new javax.swing.JTextField();
         txtDescripcion = new javax.swing.JTextField();
         txtPrecio = new javax.swing.JTextField();
-        btnAdd = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        btnDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,10 +60,25 @@ public class Tablas extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        miTabla.setFocusable(false);
+        miTabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                miTablaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(miTabla);
 
-        btnAdd.setText("Agregar producto");
-        btnAdd.addActionListener(this::btnAddActionPerformed);
+        btnSave.setText("Guardar producto");
+        btnSave.addActionListener(this::btnSaveActionPerformed);
+
+        jLabel1.setText("Cantidad");
+
+        jLabel2.setText("Descripción");
+
+        jLabel3.setText("Precio");
+
+        btnDelete.setText("Eliminar producto");
+        btnDelete.addActionListener(this::btnDeleteActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -68,14 +88,24 @@ public class Tablas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 834, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 971, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtDescripcion)
-                            .addComponent(txtPrecio)
-                            .addComponent(txtCant)
-                            .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2))
+                                .addGap(40, 40, 40)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtCant, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                                    .addComponent(txtDescripcion)
+                                    .addComponent(txtPrecio)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnSave)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnDelete)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -83,14 +113,22 @@ public class Tablas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(txtCant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -98,7 +136,7 @@ public class Tablas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
 
         String cantidad = this.txtCant.getText();
@@ -107,7 +145,7 @@ public class Tablas extends javax.swing.JFrame {
 
         if (cantidad.isBlank() || descripcion.isBlank() || precio.isBlank()) {
 
-            JOptionPane.showMessageDialog(null, "Los valores son obligatorios", "Error!",0);
+            JOptionPane.showMessageDialog(null, "Los valores son obligatorios", "Error!", 0);
 
             return;
         }
@@ -120,18 +158,65 @@ public class Tablas extends javax.swing.JFrame {
         Object[] fila = {cantidad, descripcion, precio, subtotal};
 
         //mandarlo a la tabla
-        this.model.addRow(fila);
+        if (isSaving) {
+            this.model.addRow(fila);
+        } else {
+            //debo editar la tabla
+
+        }
 
         //limpiamos los datos de las cajas de texto
         limpiarDatos();
 
-    }//GEN-LAST:event_btnAddActionPerformed
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+
+        //obtener la fila a eliminar
+        int fila = miTabla.getSelectedRow(); // devuelve -1 si no se seleccionó ninguna fila
+
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "debe seleccionar un producto");
+            return;
+        }
+
+        String descripcion = model.getValueAt(fila, 1).toString();
+
+        //hacer una confirmación
+        int respuesta = JOptionPane.showConfirmDialog(this, String.format("Seguro que quiere eliminar el producto %s ?", descripcion));
+
+        if (respuesta == 0) {
+            model.removeRow(fila);
+        }
+
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void miTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_miTablaMouseClicked
+        // TODO add your handling code here:
+
+        int fila = miTabla.getSelectedRow(); // devuelve -1 si no se seleccionó ninguna fila
+        
+        String cantidad = model.getValueAt(fila, 0).toString();
+        String descripcion = model.getValueAt(fila, 1).toString();
+        String precio = model.getValueAt(fila, 2).toString();
+
+        //rellenar las cajas de texto con la info obtenida
+        txtCant.setText(cantidad);
+        txtDescripcion.setText(descripcion);
+        txtPrecio.setText(precio);
+
+        this.isSaving = false; //porque ahora está editando
+
+    }//GEN-LAST:event_miTablaMouseClicked
 
     void limpiarDatos() {
 
         txtCant.setText("");
         txtDescripcion.setText("");
         txtPrecio.setText("");
+        this.isSaving = true;
+//        miTabla.clearSelection();
 
     }
 
@@ -175,7 +260,11 @@ public class Tablas extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable miTabla;
     private javax.swing.JTextField txtCant;
