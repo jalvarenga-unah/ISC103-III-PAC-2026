@@ -16,6 +16,7 @@ public class Tablas extends javax.swing.JFrame {
     //el modelo de la tabla, se define a nivel de Clase
     private DefaultTableModel model;
     private boolean isSaving = true;
+    private double isvCompra = 0;
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Tablas.class.getName());
 
@@ -47,6 +48,14 @@ public class Tablas extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnDelete = new javax.swing.JButton();
         lblTotal = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        lblSutotalCompra = new javax.swing.JLabel();
+        lblISV = new javax.swing.JLabel();
+        chkISV = new javax.swing.JCheckBox();
+        cmbTipoImpuesto = new javax.swing.JComboBox<>();
+        txtDescuento = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,6 +101,28 @@ public class Tablas extends javax.swing.JFrame {
         lblTotal.setFont(new java.awt.Font("Helvetica Neue", 1, 48)); // NOI18N
         lblTotal.setText("0.00");
 
+        jLabel4.setText("Subtotal");
+
+        jLabel5.setText("ISV");
+
+        lblSutotalCompra.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        lblSutotalCompra.setText("0.00");
+
+        lblISV.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        lblISV.setText("0.00");
+
+        chkISV.setText("es excento");
+
+        cmbTipoImpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "15%", "18%" }));
+
+        txtDescuento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDescuentoKeyPressed(evt);
+            }
+        });
+
+        jLabel6.setText("Descuento");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,15 +131,14 @@ public class Tablas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 973, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnSave)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnDelete)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(btnDelete))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
@@ -119,29 +149,43 @@ public class Tablas extends javax.swing.JFrame {
                                     .addComponent(txtCant, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                                     .addComponent(txtDescripcion)
                                     .addComponent(txtPrecio))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(445, 445, 445)
-                        .addComponent(lblTotal)
-                        .addGap(31, 31, 31)))
+                                .addGap(64, 64, 64)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(chkISV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmbTipoImpuesto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblTotal)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSutotalCompra)
+                            .addComponent(lblISV))))
+                .addGap(31, 31, 31))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtCant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(lblTotal)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(chkISV))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(cmbTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
@@ -149,9 +193,23 @@ public class Tablas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(lblSutotalCompra))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(lblISV))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
+                .addComponent(lblTotal)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -196,6 +254,7 @@ public class Tablas extends javax.swing.JFrame {
         limpiarDatos();
 
         //actualizar el total
+        isvCompra += getTipoImpuesto() * subtotal;
         calcularTotal();
 
 
@@ -219,7 +278,9 @@ public class Tablas extends javax.swing.JFrame {
 
         if (respuesta == 0) {
             model.removeRow(fila);
+            calcularTotal();
         }
+
 
     }//GEN-LAST:event_btnDeleteActionPerformed
 
@@ -241,20 +302,51 @@ public class Tablas extends javax.swing.JFrame {
 
     }//GEN-LAST:event_miTablaMouseClicked
 
+    private void txtDescuentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescuentoKeyPressed
+        // TODO add your handling code here:
+        System.out.println( evt.getKeyCode() );
+    }//GEN-LAST:event_txtDescuentoKeyPressed
+
     void calcularTotal() {
 
         //recorrer todos los valores de la tabla (en subtotal)
         int totalRows = miTabla.getRowCount();//la cantidad de filas
         double total = 0;
+        double subtotalCompra = 0;
+        double isv = 0;
 
         //recorrer todas las filas
         for (int fila = 0; fila < totalRows; fila++) {
             //sumarlos
-            total += Double.parseDouble(model.getValueAt(fila, 3).toString());
+            subtotalCompra += Double.parseDouble(model.getValueAt(fila, 3).toString());
+            //   total += Double.parseDouble(model.getValueAt(fila, 3).toString());
         }
 
-        //establecerlos en la etiqueta
-        lblTotal.setText("L "+total);
+//        isv = subtotalCompra * getTipoImpuesto();
+//establecerlos en la etiqueta
+        lblSutotalCompra.setText("L " + subtotalCompra);
+        lblISV.setText("L " + isvCompra);
+        total = subtotalCompra + isv;
+        lblTotal.setText("L " + total);
+
+    }
+
+    double getTipoImpuesto() {
+
+        boolean esExcento = this.chkISV.isSelected();
+
+        if (esExcento) {
+            return 0.0;
+        }
+
+        String tipoIsv = cmbTipoImpuesto.getSelectedItem().toString();
+
+        if (tipoIsv.equals("15%")) {
+            return 0.15;
+        }
+
+        return 0.18;
+
     }
 
     void limpiarDatos() {
@@ -320,14 +412,22 @@ public class Tablas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
+    private javax.swing.JCheckBox chkISV;
+    private javax.swing.JComboBox<String> cmbTipoImpuesto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblISV;
+    private javax.swing.JLabel lblSutotalCompra;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JTable miTabla;
     private javax.swing.JTextField txtCant;
     private javax.swing.JTextField txtDescripcion;
+    private javax.swing.JTextField txtDescuento;
     private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 }
