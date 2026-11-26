@@ -16,7 +16,7 @@ public class Tablas extends javax.swing.JFrame {
     //el modelo de la tabla, se define a nivel de Clase
     private DefaultTableModel model;
     private boolean isSaving = true;
-    private double isvCompra = 0;
+//    private double isvCompra = 0;
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Tablas.class.getName());
 
@@ -233,8 +233,9 @@ public class Tablas extends javax.swing.JFrame {
         int castCantidad = Integer.parseInt(cantidad);
         double castPrecio = Double.parseDouble(precio);
         double subtotal = castCantidad * castPrecio;
+        double isvProducto = getTipoImpuesto() * subtotal;
 
-        Object[] fila = {cantidad, descripcion, precio, subtotal};
+        Object[] fila = {cantidad, descripcion, precio, subtotal, isvProducto};
 
         //mandarlo a la tabla
         if (isSaving) {
@@ -254,7 +255,7 @@ public class Tablas extends javax.swing.JFrame {
         limpiarDatos();
 
         //actualizar el total
-        isvCompra += getTipoImpuesto() * subtotal;
+//        isvCompra += getTipoImpuesto() * subtotal;
         calcularTotal();
 
 
@@ -279,6 +280,7 @@ public class Tablas extends javax.swing.JFrame {
         if (respuesta == 0) {
             model.removeRow(fila);
             calcularTotal();
+            limpiarDatos();
         }
 
 
@@ -304,7 +306,27 @@ public class Tablas extends javax.swing.JFrame {
 
     private void txtDescuentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescuentoKeyPressed
         // TODO add your handling code here:
-        System.out.println( evt.getKeyCode() );
+        int code = evt.getKeyCode();
+        System.out.println(code);
+
+        if ((code < 48 && code != 10) || code > 57) {
+            
+            //que hago aqui?
+            
+            String valido = txtDescuento.getText().substring( 0, txtDescuento.getText().length()-1 );
+            
+            System.out.println(valido);
+
+            return;
+        }
+
+        if (code == 10) {
+            //aplico el descuento
+            double descuento = Double.parseDouble(txtDescuento.getText());
+            System.out.println("L" + descuento);
+        }
+
+
     }//GEN-LAST:event_txtDescuentoKeyPressed
 
     void calcularTotal() {
@@ -319,13 +341,14 @@ public class Tablas extends javax.swing.JFrame {
         for (int fila = 0; fila < totalRows; fila++) {
             //sumarlos
             subtotalCompra += Double.parseDouble(model.getValueAt(fila, 3).toString());
-            //   total += Double.parseDouble(model.getValueAt(fila, 3).toString());
+            isv += Double.parseDouble(model.getValueAt(fila, 4).toString());
+//               total += Double.parseDouble(model.getValueAt(fila, 3).toString());
         }
 
 //        isv = subtotalCompra * getTipoImpuesto();
 //establecerlos en la etiqueta
         lblSutotalCompra.setText("L " + subtotalCompra);
-        lblISV.setText("L " + isvCompra);
+        lblISV.setText("L " + isv);
         total = subtotalCompra + isv;
         lblTotal.setText("L " + total);
 
@@ -390,7 +413,7 @@ public class Tablas extends javax.swing.JFrame {
     void initTabla() {
 
         //Las columnas de la tabla
-        String[] columnas = {"Cant.", "Descripción", "Precio Unit.", "Subtotal"};
+        String[] columnas = {"Cant.", "Descripción", "Precio Unit.", "Subtotal", "Impuesto"};
 
         // crear un modelo para mi tabla
         this.model = new DefaultTableModel(null, columnas) {
