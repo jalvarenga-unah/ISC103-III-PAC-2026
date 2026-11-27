@@ -4,6 +4,7 @@
 
 package com.mycompany.minisuper;
 
+import vistas.Tablas;
 /**
  *
  * @author juanalvarenga
@@ -13,11 +14,9 @@ public class MiniSuper {
     public static void main(String[] args) {
         System.out.println("Hello World!");
         
-        PantallaPrincipal p = new PantallaPrincipal();
-        p.setVisible(false);// hace visible el formuario
-        
         Tablas tabla = new Tablas();
         tabla.setVisible(true);
+        tabla.setLocationRelativeTo(null);
         
     }
 }

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.minisuper;
+package vistas;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -16,6 +16,7 @@ public class Tablas extends javax.swing.JFrame {
     //el modelo de la tabla, se define a nivel de Clase
     private DefaultTableModel model;
     private boolean isSaving = true;
+    private double totalFactura = 0;
 //    private double isvCompra = 0;
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Tablas.class.getName());
@@ -56,6 +57,7 @@ public class Tablas extends javax.swing.JFrame {
         cmbTipoImpuesto = new javax.swing.JComboBox<>();
         txtDescuento = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -123,6 +125,9 @@ public class Tablas extends javax.swing.JFrame {
 
         jLabel6.setText("Descuento");
 
+        jButton1.setText("llamar a otra pantalla");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -152,7 +157,10 @@ public class Tablas extends javax.swing.JFrame {
                                 .addGap(64, 64, 64)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(chkISV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cmbTipoImpuesto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                    .addComponent(cmbTipoImpuesto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1)
+                                .addGap(30, 30, 30)))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -175,20 +183,25 @@ public class Tablas extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(chkISV))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(cmbTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(chkISV))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(cmbTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jButton1)))
                 .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -310,11 +323,10 @@ public class Tablas extends javax.swing.JFrame {
         System.out.println(code);
 
         if ((code < 48 && code != 10) || code > 57) {
-            
+
             //que hago aqui?
-            
-            String valido = txtDescuento.getText().substring( 0, txtDescuento.getText().length()-1 );
-            
+            String valido = txtDescuento.getText().substring(0, txtDescuento.getText().length() - 1);
+
             System.out.println(valido);
 
             return;
@@ -329,6 +341,19 @@ public class Tablas extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtDescuentoKeyPressed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+        PantallaPrincipal p = new PantallaPrincipal(totalFactura);
+
+        p.setVisible(true);// hace visible el formuario
+
+        p.setLocationRelativeTo(null);
+
+//        this.dispose(); // cierra el formulari actual
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     void calcularTotal() {
 
         //recorrer todos los valores de la tabla (en subtotal)
@@ -341,7 +366,7 @@ public class Tablas extends javax.swing.JFrame {
         for (int fila = 0; fila < totalRows; fila++) {
             //sumarlos
             subtotalCompra += Double.parseDouble(model.getValueAt(fila, 3).toString());
-            isv += Double.parseDouble(model.getValueAt(fila, 4).toString());
+            isv += Math.round(Double.parseDouble(model.getValueAt(fila, 4).toString())) ;
 //               total += Double.parseDouble(model.getValueAt(fila, 3).toString());
         }
 
@@ -349,9 +374,9 @@ public class Tablas extends javax.swing.JFrame {
 //establecerlos en la etiqueta
         lblSutotalCompra.setText("L " + subtotalCompra);
         lblISV.setText("L " + isv);
-        total = subtotalCompra + isv;
+        total = Math. round(subtotalCompra + isv);
         lblTotal.setText("L " + total);
-
+        totalFactura = total;
     }
 
     double getTipoImpuesto() {
@@ -437,6 +462,7 @@ public class Tablas extends javax.swing.JFrame {
     private javax.swing.JButton btnSave;
     private javax.swing.JCheckBox chkISV;
     private javax.swing.JComboBox<String> cmbTipoImpuesto;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
